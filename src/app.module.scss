@@ -1,0 +1,45 @@
+.pageWrapper {
+  min-height: 100vh;
+  padding: 50px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media screen and (min-height: 700px) {
+    justify-content: center;
+  }
+}
+
+
+.widgetWrapper {
+  max-width: 730px;
+  margin: 0 auto 35px;
+
+  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.08);
+  border: none;
+
+  .content {
+
+    display: flex;
+    & > * {
+      flex-basis: 365px;
+      flex-grow: 1;
+      max-width: 365px;
+    }
+
+
+    .left {
+      .headline {
+        font-size: 1rem;
+      }
+      .btnAction {
+        width: 100%;
+        text-align: center;
+      }
+
+      .inputNameSurnameGroup {
+        flex-wrap: nowrap;
+      }
+    }
+  }
+
+}

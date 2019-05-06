@@ -1,0 +1,9 @@
+{
+  "env": {
+    "jest": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ]
+}
