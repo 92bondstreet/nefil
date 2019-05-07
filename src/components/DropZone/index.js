@@ -17,7 +17,7 @@ const DropZone = props => {
         <Emoji symbol="🎯 " label="Drop" /> Drop Zone for Your Files
       </UikWidgetHeader>
       <UikWidgetContent>
-        <div
+        <div data-testid="dropzone-div"
           {...getRootProps({'className': 'dropzone'})}
           className={styles.dropzone}
         >

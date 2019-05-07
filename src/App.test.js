@@ -1,10 +1,19 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import App from './App';
+import {cleanup, render} from 'react-testing-library';
+import 'jest-dom/extend-expect';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
+afterEach(cleanup);
 
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+it('should render the Header section', () => {
+  const {getByText} = render(<App />);
+
+  expect(getByText(/Medical Reports/)).toBeInTheDocument();
+});
+
+it('should render the Dashboard section', () => {
+  const {getByText} = render(<App />);
+
+  expect(getByText(/Drop Zone for Your Files/)).toBeInTheDocument();
+  expect(getByText(/Uploaded Files/)).toBeInTheDocument();
 });

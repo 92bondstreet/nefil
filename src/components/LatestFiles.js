@@ -14,7 +14,7 @@ const LatestFiles = props =>
           <th>File Name</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody data-testid="latest-files-tbody">
         {props.files.map((file, index) =>
           <tr key={index}>
             <td key={index}>{file.name}</td>
