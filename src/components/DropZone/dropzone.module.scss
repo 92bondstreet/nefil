@@ -1,0 +1,14 @@
+@import '@uik/_vars.scss';
+
+.dropzone {
+  border: 2px dashed $blue;
+  border-image: none;
+  min-height: 300px;
+}
+
+.message {
+  cursor: pointer;
+  font-size: 1.2em;
+  margin: 5em 0;
+  text-align: center;
+}
