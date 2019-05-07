@@ -2,6 +2,10 @@ SHELL := /bin/bash
 
 .PHONY: sandbox
 
+deploy: ## deploy with zeit
+	yarn run build
+	now --target production
+
 sandbox: ## sandbox for client-side dev purpose
 	yarn start
 
