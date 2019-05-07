@@ -1,15 +1,15 @@
-import * as React from "react";
-import Emoji from "a11y-react-emoji";
-import PropTypes from "prop-types";
-import { UikButton, UikWidget, UikWidgetHeader, UikWidgetContent } from "@uik";
+import * as React from 'react';
+import Emoji from 'a11y-react-emoji';
+import PropTypes from 'prop-types';
+import {UikButton, UikWidget, UikWidgetHeader, UikWidgetContent} from '@uik';
 
-import { useDropzone } from "react-dropzone";
+import {useDropzone} from 'react-dropzone';
 
-import styles from "./dropzone.module.scss";
+import styles from './dropzone.module.scss';
 
 const DropZone = props => {
-  const { onDrop } = props;
-  const { getRootProps, getInputProps } = useDropzone({ onDrop });
+  const {onDrop} = props;
+  const {getRootProps, getInputProps} = useDropzone({onDrop});
 
   return (
     <UikWidget margin>
@@ -18,12 +18,12 @@ const DropZone = props => {
       </UikWidgetHeader>
       <UikWidgetContent>
         <div
-          {...getRootProps({ className: "dropzone" })}
+          {...getRootProps({'className': 'dropzone'})}
           className={styles.dropzone}
         >
           <input {...getInputProps()} />
           <p className={styles.message}>
-            Drag and drop some files here, or{" "}
+            Drag and drop some files here, or{' '}
             <UikButton primary>click here</UikButton> to select files
           </p>
         </div>
@@ -33,7 +33,7 @@ const DropZone = props => {
 };
 
 DropZone.propTypes = {
-  onDrop: PropTypes.func.isRequired
+  'onDrop': PropTypes.func.isRequired
 };
 
 export default DropZone;

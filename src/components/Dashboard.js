@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { UikLayoutMain } from "@uik";
+import React, {useState} from 'react';
+import {UikLayoutMain} from '@uik';
 
-import DropZone from "./DropZone";
-import LatestFiles from "./LatestFiles";
+import DropZone from './DropZone';
+import LatestFiles from './LatestFiles';
 
 /**
  * [Container description]
@@ -10,7 +10,7 @@ import LatestFiles from "./LatestFiles";
 const Dashboard = () => {
   const [files, setFiles] = useState([]);
   const handleOnDrop = acceptedFiles =>
-    setFiles(files => acceptedFiles.concat(files));
+    setFiles(accepted => acceptedFiles.concat(accepted));
 
   return (
     <UikLayoutMain>
