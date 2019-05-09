@@ -1,0 +1,49 @@
+@import '@uik/_vars.scss';
+
+.status {
+  text-align: right !important;
+}
+
+.value {
+  position: relative;
+
+  &.failed,
+  &.inprogress,
+  &.ready,
+  &.uploaded {
+    padding-right: 44px;
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      height: 6px;
+      width: 6px;
+      border-radius: 50%;
+      background: $blue;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 15px;
+    }
+  }
+
+  &.failed {
+    &:after {
+      background: $red;
+    }
+  }
+  &.inprogress {
+    &:after {
+      background: $blue;
+    }
+  }
+  &.ready {
+    &:after {
+      background: $violet;
+    }
+  }
+  &.uploaded {
+    &:after {
+      background: $green;
+    }
+  }
+}

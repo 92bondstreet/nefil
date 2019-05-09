@@ -11,6 +11,7 @@ Very - _very very_ - first iteration of a web application connected to the [FHIR
 ## 📱 Features
 
 - [X] 🎯 Select file with a drop zone
+- [X] 📡 Send files content as `Binary` to the [fhirtest API Server](https://fhirtest.uhn.ca/baseDstu3/Binary)
 
 ## 🚀 Deploy
 

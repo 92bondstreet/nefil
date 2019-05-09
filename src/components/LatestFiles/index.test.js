@@ -1,5 +1,5 @@
 import React from 'react';
-import LatestFiles from './LatestFiles';
+import LatestFiles from './index';
 import {cleanup, render} from 'react-testing-library';
 import 'jest-dom/extend-expect';
 

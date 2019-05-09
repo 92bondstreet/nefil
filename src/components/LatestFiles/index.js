@@ -3,6 +3,8 @@ import Emoji from 'a11y-react-emoji';
 import PropTypes from 'prop-types';
 import {UikWidget, UikWidgetHeader, UikWidgetTable} from '@uik';
 
+import styles from './latestfiles.module.scss';
+
 const LatestFiles = props =>
   <UikWidget margin {...props}>
     <UikWidgetHeader>
@@ -12,12 +14,21 @@ const LatestFiles = props =>
       <thead>
         <tr>
           <th>File Name</th>
+          <th className={styles.status}>Status</th>
         </tr>
       </thead>
       <tbody data-testid="latest-files-tbody">
         {props.files.map((file, index) =>
           <tr key={index}>
-            <td key={index}>{file.name}</td>
+            <td key={`name-${index}`}>{file.name}</td>
+            <td
+              key={`status-${index}`}
+              className={`${styles.value} ${styles[file.status]} ${
+                styles.status
+              }`}
+            >
+              {file.status}
+            </td>
           </tr>
         )}
       </tbody>
