@@ -1,1 +1,1 @@
-export const API_FHIR = 'https://fhirtest.uhn.ca/baseDstu3/Binary';
+export const API_FHIR = 'https://hapi.fhir.org//baseDstu3';

@@ -2,6 +2,38 @@ import * as types from '../constants/action-types';
 import * as dashboard from '../constants/dashboard';
 
 /**
+ * Parse history queries to generate the analytics
+ * @param  {[Array]} response
+ * @return {Object}
+ */
+const parseHistory = response => {
+  const down = response.filter(
+    item => item instanceof window.Response && item.ok === false
+  );
+
+  // it means that 2 history requests are down
+  if (down.length === 2) {
+    return {'ping': 'down'};
+  }
+
+  const analytics = {'ping': 'up'};
+  const [binary, all] = response;
+
+  if (binary && binary.total) {
+    const [latest] = binary.entry || [];
+
+    analytics['total-binary'] = binary.total;
+    analytics['last-binary'] = new Date(latest.resource.meta.lastUpdated).toLocaleString();
+  }
+
+  if (all && all.total) {
+    analytics['total-all'] = all.total;
+  }
+
+  return analytics;
+};
+
+/**
  * Reducer for the Dashboard
  *
  * @param  {Object} state current state
@@ -45,6 +77,26 @@ export default function DashboardReducer (state, action) {
         return file;
       })
     };
+  case types.READ_HISTORY_SUCCESS: {
+    const {response} = action;
+
+    return {
+      ...state,
+      'analytics': {
+        ...parseHistory(response)
+      }
+    };
+  }
+  case types.READ_HISTORY_FAILURE: {
+    const ping = 'down';
+
+    return {
+      ...state,
+      'analytics': {
+        ...{ping}
+      }
+    };
+  }
   default:
     return state;
   }

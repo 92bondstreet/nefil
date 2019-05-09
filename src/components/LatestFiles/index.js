@@ -6,7 +6,7 @@ import {UikWidget, UikWidgetHeader, UikWidgetTable} from '@uik';
 import styles from './latestfiles.module.scss';
 
 const LatestFiles = props =>
-  <UikWidget margin {...props}>
+  <UikWidget margin {...props} className={styles.container}>
     <UikWidgetHeader>
       <Emoji symbol="🗃️" label="Files" /> Latest Uploaded Files
     </UikWidgetHeader>

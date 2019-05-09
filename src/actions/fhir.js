@@ -1,5 +1,28 @@
 import * as types from '../constants/action-types';
-import {API_FHIR} from '../constants/api-urls';
+import {
+  API_FHIR
+} from '../constants/api-urls';
+
+/**
+ * Wrapper for fetch GET
+ * @param  {String}  url
+ * @return {Response | Object}
+ */
+const getApi = async url => {
+  let response;
+
+  try {
+    response = await fetch(url);
+
+    if (! response.ok) {
+      return response;
+    }
+
+    return await response.json();
+  } catch (error) {
+    return error;
+  }
+};
 
 /**
  * Upload file to FHIR server
@@ -7,12 +30,13 @@ import {API_FHIR} from '../constants/api-urls';
  * @param {Function} dispatch
  */
 export async function createFile (body, dispatch = () => {}) {
+  const url = `${API_FHIR}/Binary`;
   const {uuid} = body;
 
   dispatch({'type': types.CREATE_FILE_REQUEST, uuid});
 
   try {
-    const response = await fetch(API_FHIR, {body, 'method': 'POST'});
+    const response = await fetch(url, {body, 'method': 'POST'});
 
     if (! response.ok) {
       return dispatch({'type': types.CREATE_FILE_FAILURE, uuid, response});
@@ -21,5 +45,31 @@ export async function createFile (body, dispatch = () => {}) {
     return dispatch({'type': types.CREATE_FILE_SUCCESS, uuid, response});
   } catch (error) {
     return dispatch({'type': types.CREATE_FILE_FAILURE, uuid, error});
+  }
+}
+
+/**
+ * Upload files to FHIR server
+ * @param {Array} files
+ * @param {Function} dispatch
+ */
+export async function createFiles (files, dispatch = () => {}) {
+  return await Promise.all(files.map(file => createFile(file, dispatch)));
+}
+
+/**
+ * Get history for spectific resource
+ * @param {Function} dispatch
+ */
+export async function readHistory (dispatch = () => {}) {
+  try {
+    const response = await Promise.all([
+      getApi(`${API_FHIR}/Binary/_history?_pretty=true&_format=json`),
+      getApi(`${API_FHIR}/_history?_pretty=true&_format=json`)
+    ]);
+
+    return dispatch({'type': types.READ_HISTORY_SUCCESS, response});
+  } catch (error) {
+    return dispatch({'type': types.READ_HISTORY_FAILURE, error});
   }
 }

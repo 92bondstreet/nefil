@@ -8,7 +8,7 @@ const AnalyticsHeader = props =>
   <UikTopBar {...props}>
     <UikTopBarSection>
       <UikTopBarTitle large>
-        <Emoji symbol="👩‍⚕️ 📊" label="Doctor" className={styles.emoji} /> Medical
+        <Emoji symbol="👩‍⚕️" label="Doctor" className={styles.emoji} /> Medical
         Reports Dashboard Analytics
       </UikTopBarTitle>
     </UikTopBarSection>
