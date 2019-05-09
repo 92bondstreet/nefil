@@ -1,13 +1,23 @@
 SHELL := /bin/bash
 
-.PHONY: sandbox
+build: ## build a ready-production web application
+	yarn run build
+
+build-desktop: ## build a ready-production desktop application
+	yarn electron-pack $(filter-out $@,$(MAKECMDGOALS))
 
 deploy: ## deploy with zeit
-	yarn run build
+	make build
 	now --target production
 
-sandbox: ## sandbox for client-side dev purpose
+install: ## install what we need
+	yarn
+
+sandbox: ## sandbox for client-side application dev purpose
 	yarn start
+
+sandbox-desktop: ## sandbox for desktop application dev purpose
+	yarn electron-dev
 
 test: ## test with watcher
 	yarn test --coverage
