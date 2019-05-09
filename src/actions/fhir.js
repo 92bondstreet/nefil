@@ -1,14 +1,12 @@
 import * as types from '../constants/action-types';
-import {
-  API_FHIR
-} from '../constants/api-urls';
+import {API_FHIR} from '../constants/api-urls';
 
 /**
  * Wrapper for fetch GET
  * @param  {String}  url
  * @return {Response | Object}
  */
-const getApi = async url => {
+export async function getApi (url) {
   let response;
 
   try {
@@ -22,7 +20,7 @@ const getApi = async url => {
   } catch (error) {
     return error;
   }
-};
+}
 
 /**
  * Upload file to FHIR server
@@ -62,14 +60,10 @@ export async function createFiles (files, dispatch = () => {}) {
  * @param {Function} dispatch
  */
 export async function readHistory (dispatch = () => {}) {
-  try {
-    const response = await Promise.all([
-      getApi(`${API_FHIR}/Binary/_history?_pretty=true&_format=json`),
-      getApi(`${API_FHIR}/_history?_pretty=true&_format=json`)
-    ]);
+  const response = await Promise.all([
+    getApi(`${API_FHIR}/Binary/_history?_pretty=true&_format=json`),
+    getApi(`${API_FHIR}/_history?_pretty=true&_format=json`)
+  ]);
 
-    return dispatch({'type': types.READ_HISTORY_SUCCESS, response});
-  } catch (error) {
-    return dispatch({'type': types.READ_HISTORY_FAILURE, error});
-  }
+  return dispatch({'type': types.READ_HISTORY_SUCCESS, response});
 }

@@ -1,9 +1,18 @@
 import React from 'react';
 import Dashboard from './index';
+import fetchMock from 'fetch-mock';
 import {cleanup, fireEvent, render} from 'react-testing-library';
 import 'jest-dom/extend-expect';
 
-afterEach(cleanup);
+import {API_FHIR} from '../../constants/api-urls';
+
+const API_FHIR_MATCHER = `begin:${API_FHIR}`;
+
+afterEach(() => {
+  cleanup();
+  fetchMock.reset();
+  fetchMock.restore();
+});
 
 const createFile = (name, size, type) => {
   const file = new File([], name, {type});
@@ -73,5 +82,23 @@ describe('<Dashboard />', () => {
     dispatchEvt(dropzone, 'drop', data);
     await flushPromises(ui, container);
     expect(tbody.children.length).toBe(files.length);
+  });
+
+  it('should fetch the history once files dropes', async () => {
+    const files = [
+      createFile('file1.pdf', 1111, 'application/pdf'),
+      createFile('file2.pdf', 1111, 'application/pdf'),
+      createFile('file3.pdf', 1111, 'application/pdf')
+    ];
+    const data = mockData(files);
+    const ui = <Dashboard />;
+    const {container, getByTestId} = render(ui);
+    const dropzone = getByTestId('dropzone-div');
+
+    fetchMock.get(API_FHIR_MATCHER, 200);
+    dispatchEvt(dropzone, 'drop', data);
+    await flushPromises(ui, container);
+
+    expect(fetchMock.called(API_FHIR_MATCHER)).toBe(true);
   });
 });

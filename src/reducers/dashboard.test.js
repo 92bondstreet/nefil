@@ -16,6 +16,86 @@ const state = {
   ]
 };
 
+const responseBinary = {
+  'resourceType': 'Bundle',
+  'id': 'f3e09a0d-a765-4089-8de3-3020a9e5c36d',
+  'meta': {
+    'lastUpdated': '2019-05-09T21:09:03.020+00:00'
+  },
+  'type': 'history',
+  'total': 1234,
+  'link': [
+    {
+      'relation': 'self',
+      'url':
+        'http://hapi.fhir.org/baseDstu3/Binary/_history?_format=json&_pretty=true'
+    },
+    {
+      'relation': 'next',
+      'url':
+        'http://hapi.fhir.org/baseDstu3?_getpages=f3e09a0d-a765-4089-8de3-3020a9e5c36d&_getpagesoffset=20&_count=20&_format=json&_pretty=true&_bundletype=history'
+    }
+  ],
+  'entry': [
+    {
+      'fullUrl': 'http://hapi.fhir.org/baseDstu3/Binary/1921753',
+      'resource': {
+        'resourceType': 'Binary',
+        'id': '1921753',
+        'meta': {
+          'versionId': '1',
+          'lastUpdated': '2019-05-09T21:07:05.595+00:00'
+        },
+        'contentType': 'application/pdf'
+      },
+      'request': {
+        'method': 'POST',
+        'url': 'http://hapi.fhir.org/baseDstu3/Binary/1921753/_history/1'
+      }
+    }
+  ]
+};
+
+const responseHistory = {
+  'resourceType': 'Bundle',
+  'id': 'f3e09a0d-a765-4089-8de3-3020a9e5c36d',
+  'meta': {
+    'lastUpdated': '2019-05-09T21:09:03.020+00:00'
+  },
+  'type': 'history',
+  'total': 56789,
+  'link': [
+    {
+      'relation': 'self',
+      'url':
+        'http://hapi.fhir.org/baseDstu3/Binary/_history?_format=json&_pretty=true'
+    },
+    {
+      'relation': 'next',
+      'url':
+        'http://hapi.fhir.org/baseDstu3?_getpages=f3e09a0d-a765-4089-8de3-3020a9e5c36d&_getpagesoffset=20&_count=20&_format=json&_pretty=true&_bundletype=history'
+    }
+  ],
+  'entry': [
+    {
+      'fullUrl': 'http://hapi.fhir.org/baseDstu3/Binary/1921753',
+      'resource': {
+        'resourceType': 'Binary',
+        'id': '1921753',
+        'meta': {
+          'versionId': '1',
+          'lastUpdated': '2019-05-09T21:07:05.595+00:00'
+        },
+        'contentType': 'application/pdf'
+      },
+      'request': {
+        'method': 'POST',
+        'url': 'http://hapi.fhir.org/baseDstu3/Binary/1921753/_history/1'
+      }
+    }
+  ]
+};
+
 describe('dashboard reducer', () => {
   it('should return the current state if action is whatever', () => {
     expect(dashboard(state, 'whatever')).toEqual(state);
@@ -117,6 +197,114 @@ describe('dashboard reducer', () => {
           'uuid': 'f3fef468-827f-498d-88bb-e36b04c7ea87'
         }
       ]
+    });
+  });
+
+  it('should set analytics if action is READ_HISTORY_SUCCESS', () => {
+    expect(
+      dashboard(
+        {},
+        {
+          'type': types.READ_HISTORY_SUCCESS,
+          'response': [responseBinary, responseHistory]
+        }
+      )
+    ).toEqual({
+      'analytics': {
+        'last-binary': '5/9/2019, 11:07:05 PM',
+        'ping': 'up',
+        'total-all': 56789,
+        'total-binary': 1234
+      }
+    });
+  });
+
+  it('should set analytics for "binary" only with READ_HISTORY_SUCCESS', () => {
+    expect(
+      dashboard(
+        {},
+        {
+          'type': types.READ_HISTORY_SUCCESS,
+          'response': [responseBinary]
+        }
+      )
+    ).toEqual({
+      'analytics': {
+        'last-binary': '5/9/2019, 11:07:05 PM',
+        'ping': 'up',
+        'total-binary': 1234
+      }
+    });
+  });
+
+  it('should set analytics for "binary" even without latest bundle with READ_HISTORY_SUCCESS', () => {
+    expect(
+      dashboard(
+        {},
+        {
+          'type': types.READ_HISTORY_SUCCESS,
+          'response': [{'total': 1234}]
+        }
+      )
+    ).toEqual({
+      'analytics': {
+        'ping': 'up',
+        'total-binary': 1234
+      }
+    });
+  });
+
+  it('should set analytics for "all" only with READ_HISTORY_SUCCESS', () => {
+    expect(
+      dashboard(
+        {},
+        {
+          'type': types.READ_HISTORY_SUCCESS,
+          'response': [{}, responseHistory]
+        }
+      )
+    ).toEqual({
+      'analytics': {
+        'ping': 'up',
+        'total-all': 56789
+      }
+    });
+  });
+
+  it('should set analytics with down ping for down requests', () => {
+    const resBinary = new Response();
+    const resHistory = new Response();
+
+    resBinary.ok = false;
+    resHistory.ok = false;
+
+    expect(
+      dashboard(
+        {},
+        {
+          'type': types.READ_HISTORY_SUCCESS,
+          'response': [resBinary, resHistory]
+        }
+      )
+    ).toEqual({
+      'analytics': {
+        'ping': 'down'
+      }
+    });
+  });
+
+  it('should set analytics with down ping for READ_HISTORY_FAILURE', () => {
+    expect(
+      dashboard(
+        {},
+        {
+          'type': types.READ_HISTORY_FAILURE
+        }
+      )
+    ).toEqual({
+      'analytics': {
+        'ping': 'down'
+      }
     });
   });
 });

@@ -23,7 +23,12 @@ const parseHistory = response => {
     const [latest] = binary.entry || [];
 
     analytics['total-binary'] = binary.total;
-    analytics['last-binary'] = new Date(latest.resource.meta.lastUpdated).toLocaleString();
+
+    if (latest && latest.resource) {
+      analytics['last-binary'] = new Date(
+        latest.resource.meta.lastUpdated
+      ).toLocaleString();
+    }
   }
 
   if (all && all.total) {
