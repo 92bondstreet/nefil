@@ -14,8 +14,12 @@ export async function createFile (body, dispatch = () => {}) {
   try {
     const response = await fetch(API_FHIR, {body, 'method': 'POST'});
 
-    dispatch({'type': types.CREATE_FILE_SUCCESS, uuid, response});
+    if (! response.ok) {
+      return dispatch({'type': types.CREATE_FILE_FAILURE, uuid, response});
+    }
+
+    return dispatch({'type': types.CREATE_FILE_SUCCESS, uuid, response});
   } catch (error) {
-    dispatch({'type': types.CREATE_FILE_FAILURE, uuid, error});
+    return dispatch({'type': types.CREATE_FILE_FAILURE, uuid, error});
   }
 }

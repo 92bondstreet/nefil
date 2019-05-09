@@ -36,7 +36,9 @@
     ]
   },
   "devDependencies": {
+    "fetch-mock": "^7.3.3",
     "jest-dom": "^3.2.1",
+    "node-fetch": "^2.5.0",
     "react-testing-library": "^7.0.0"
   },
   "jest": {
