@@ -6,8 +6,11 @@
   min-height: 200px;
 }
 
+.drag-active {
+  border: 3px dashed $green;
+}
+
 .message {
-  cursor: pointer;
   font-size: 1em;
   margin: 5em 0;
   text-align: center;

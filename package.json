@@ -6,26 +6,30 @@
   "homepage": "./",
   "dependencies": {
     "a11y-react-emoji": "^1.0.0",
+    "b64-to-blob": "^1.2.19",
+    "chokidar": "^3.0.0",
     "classnames": "^2.2.6",
     "electron-is-dev": "^1.1.0",
+    "is-electron": "^2.2.0",
+    "mime": "^2.4.2",
     "node-sass": "^4.12.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-dropzone": "^10.1.4",
-    "react-scripts": "3.0.0",
+    "react-scripts": "3.0.1",
     "typeface-roboto": "^0.0.54",
     "uuid": "^3.3.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "rescripts start",
+    "build": "rescripts build",
+    "test": "rescripts test",
     "eject": "react-scripts eject",
     "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
     "postinstall": "electron-builder install-app-deps",
     "preelectron-pack": "yarn build",
-    "electron-pack": "electron-builder"
+    "electron-pack": "ELECTRON_PACK=true electron-builder"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -43,6 +47,8 @@
     ]
   },
   "devDependencies": {
+    "@rescripts/cli": "^0.0.10",
+    "@rescripts/rescript-env": "^0.0.10",
     "concurrently": "^4.1.0",
     "electron": "^5.0.1",
     "electron-builder": "^20.40.2",
@@ -70,7 +76,7 @@
     }
   },
   "build": {
-    "appId": "com.lifen",
+    "appId": "com.lifen.app",
     "files": [
       "build/**/*"
     ]

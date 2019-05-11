@@ -6,7 +6,11 @@
 
 ## 🐣 Introduction
 
-Very - _very very_ - first iteration of a web application connected to the [FHIR standard](https://www.hl7.org/fhir) that will upload a document and give some reporting to the user.
+Very - _very very_ - first iteration of a web application connected to the [FHIR standard](https://www.hl7.org/fhir) that will upload a document and give some analytics to the user.
+
+## 💻 [Live demo](https://nefil.now.sh/)
+
+![Nefil](./web.png)
 
 ## 🏗️  Installation
 
@@ -17,9 +21,11 @@ Very - _very very_ - first iteration of a web application connected to the [FHIR
 
 **Note:**
 
-* Bootstrapped with [create-react-app v3](https://github.com/facebook/create-react-app/blob/master/CHANGELOG.md)
+* Bootstrapped with [create-react-app 3.0.1](https://github.com/facebook/create-react-app/blob/master/CHANGELOG.md)
 * Based on [React Hooks](https://reactjs.org/docs/hooks-intro.html) (at least React 16.8)
 * [Yarn](https://yarnpkg.com) is the package manager
+* [react-scripts](https://www.npmjs.com/package/react-scripts) is replaced by [rescripts](https://github.com/harrysolovay/rescripts) to allows us to customize the CRA setup without ejecting
+* Update the `.webpack.config.js` with `electron-renderer` as [target](https://webpack.js.org/configuration/target/)
 
 ## 🕹️  Usage
 
@@ -49,6 +55,7 @@ Very - _very very_ - first iteration of a web application connected to the [FHIR
 - [X] 📡 Send files content as `Binary` to the [fhir API Server](https://fhirtest.uhn.ca/baseDstu3/Binary)
 - [X] 📈 Get some analytics from [fhir Server](https://hapi.fhir.org/)
 - [X] 📦 Pack a desktop application with [Electron](https://electronjs.org)
+- [X] 📦 Watch a local directory
 
 ## 🚀 Deploy
 

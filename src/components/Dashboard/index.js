@@ -2,7 +2,7 @@ import React, {useEffect, useReducer} from 'react';
 import {UikLayoutMain} from '@uik';
 import uuidv4 from 'uuid/v4';
 
-import * as actions from '../../actions/fhir';
+import * as actions from '../../actions';
 import Analytics from '../Analytics';
 import DashboardReducer from '../../reducers/dashboard';
 import DropZone from '../DropZone';

@@ -11,13 +11,14 @@ deploy: ## deploy with zeit
 	now --target production
 
 install: ## install what we need
+	mkidr -p ~/FHIR
 	yarn
 
 sandbox: ## sandbox for client-side application dev purpose
 	yarn start
 
 sandbox-desktop: ## sandbox for desktop application dev purpose
-	yarn electron-dev
+	ELECTRON_ENABLE_LOGGING=1 yarn electron-dev
 
 test: ## test with watcher
 	yarn test --coverage
