@@ -10,6 +10,10 @@
   border: 3px dashed $green;
 }
 
+.drag-reject {
+  border: 3px dashed $red;
+}
+
 .message {
   font-size: 1em;
   margin: 5em 0;

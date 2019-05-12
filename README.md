@@ -1,8 +1,8 @@
 # NEFIL
 
-> Medical reports dashboard analytics
+> FHIR dashboard
 
-![Nefil](./web.png)
+[![Nefil dashboard](./web.png)](https://nefil.now.sh/)
 
 ## 🐣 Introduction
 
@@ -25,7 +25,7 @@ Very - _very very_ - first iteration of a web application connected to the [FHIR
 * [react-scripts](https://www.npmjs.com/package/react-scripts) is replaced by [rescripts](https://github.com/harrysolovay/rescripts) to allows us to customize the CRA setup without ejecting
 * Update the `.webpack.config.js` with `electron-renderer` as [target](https://webpack.js.org/configuration/target/)
 
-### Configuration
+### Configuration (.env)
 
 `FHIR_DIRECTORY`
 
@@ -60,7 +60,8 @@ Used only for the build.
 - [X] 📡 Send files content as `Binary` to the [fhir API Server](https://fhirtest.uhn.ca/baseDstu3/Binary)
 - [X] 📈 Get some analytics from [fhir Server](https://hapi.fhir.org/)
 - [X] 📦 Pack a desktop application with [Electron](https://electronjs.org)
-- [X] 📦 Watch a local directory
+- [X] 🕵️‍♀️ Watch a local directory
+- [X] ✉️ Upload pdf and small (less than 2mo) files
 
 ## 🚀 Deploy
 
