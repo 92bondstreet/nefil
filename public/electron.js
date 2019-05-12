@@ -1,11 +1,20 @@
+/* eslint-disable no-process-env */
 const {app, BrowserWindow} = require('electron');
 const chokidar = require('chokidar');
 const fs = require('fs');
 const isDev = require('electron-is-dev');
 const mime = require('mime');
 const path = require('path');
+const untildify = require('untildify');
 
-const watcher = chokidar.watch('~/FHIR');
+require('dotenv').config();
+
+const DEFAULT_FHIR_DIRECTORY = '~/FHIR';
+const FHIR_DIRECTORY = untildify(process.env.FHIR_DIRECTORY || DEFAULT_FHIR_DIRECTORY);
+
+console.log(path.normalize(FHIR_DIRECTORY));
+
+const watcher = chokidar.watch(FHIR_DIRECTORY);
 
 let mainWindow;
 

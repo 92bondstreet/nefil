@@ -2,15 +2,13 @@
 
 > Medical reports dashboard analytics
 
-![Photo by @zhenhu2424](https://source.unsplash.com/Xruf17OrkwM/800x600)
+![Nefil](./web.png)
 
 ## 🐣 Introduction
 
 Very - _very very_ - first iteration of a web application connected to the [FHIR standard](https://www.hl7.org/fhir) that will upload a document and give some analytics to the user.
 
 ## 💻 [Live demo](https://nefil.now.sh/)
-
-![Nefil](./web.png)
 
 ## 🏗️  Installation
 
@@ -26,6 +24,13 @@ Very - _very very_ - first iteration of a web application connected to the [FHIR
 * [Yarn](https://yarnpkg.com) is the package manager
 * [react-scripts](https://www.npmjs.com/package/react-scripts) is replaced by [rescripts](https://github.com/harrysolovay/rescripts) to allows us to customize the CRA setup without ejecting
 * Update the `.webpack.config.js` with `electron-renderer` as [target](https://webpack.js.org/configuration/target/)
+
+### Configuration
+
+`FHIR_DIRECTORY`
+
+Set and define the directory to watch for the desktop application.
+Used only for the build.
 
 ## 🕹️  Usage
 

@@ -1,5 +1,7 @@
 SHELL := /bin/bash
 
+.PHONY: build
+
 build: ## build a ready-production web application
 	yarn run build
 

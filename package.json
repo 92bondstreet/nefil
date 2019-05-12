@@ -9,6 +9,7 @@
     "b64-to-blob": "^1.2.19",
     "chokidar": "^3.0.0",
     "classnames": "^2.2.6",
+    "dotenv": "^8.0.0",
     "electron-is-dev": "^1.1.0",
     "is-electron": "^2.2.0",
     "mime": "^2.4.2",
@@ -19,6 +20,7 @@
     "react-dropzone": "^10.1.4",
     "react-scripts": "3.0.1",
     "typeface-roboto": "^0.0.54",
+    "untildify": "^4.0.0",
     "uuid": "^3.3.2"
   },
   "scripts": {

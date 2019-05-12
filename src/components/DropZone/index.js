@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import classNames from 'classnames/bind';
-import desktop from '../../actions/desktop';
+import * as desktop from '../../actions/desktop';
 import Emoji from 'a11y-react-emoji';
 import isElectron from 'is-electron';
 import PropTypes from 'prop-types';

@@ -25,7 +25,7 @@ const dispatchEvent = (node, type, data) => {
  * Listen the watch message and emulate a drop
  * @param  {HTMLElement} dropzone
  */
-export default async function watch (dropzone) {
+export async function watch (dropzone) {
   ipcRenderer.on('watch-desktop-files', (event, args) => {
     const {base64, name} = args;
     const [header, content] = base64.split(',');
