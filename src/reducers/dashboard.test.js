@@ -16,6 +16,7 @@ const state = {
   ]
 };
 
+const lastUpdated = '2019-05-09';
 const responseBinary = {
   'resourceType': 'Bundle',
   'id': 'f3e09a0d-a765-4089-8de3-3020a9e5c36d',
@@ -44,7 +45,7 @@ const responseBinary = {
         'id': '1921753',
         'meta': {
           'versionId': '1',
-          'lastUpdated': '2019-05-09T21:07:05.595+00:00'
+          'lastUpdated': '2019-05-09'
         },
         'contentType': 'application/pdf'
       },
@@ -84,7 +85,7 @@ const responseHistory = {
         'id': '1921753',
         'meta': {
           'versionId': '1',
-          'lastUpdated': '2019-05-09T21:07:05.595+00:00'
+          'lastUpdated': '2019-05-09'
         },
         'contentType': 'application/pdf'
       },
@@ -211,7 +212,7 @@ describe('dashboard reducer', () => {
       )
     ).toEqual({
       'analytics': {
-        'last-binary': '5/9/2019, 11:07:05 PM',
+        'last-binary': new Date(lastUpdated).toLocaleString(),
         'ping': 'up',
         'total-all': 56789,
         'total-binary': 1234
@@ -230,7 +231,7 @@ describe('dashboard reducer', () => {
       )
     ).toEqual({
       'analytics': {
-        'last-binary': '5/9/2019, 11:07:05 PM',
+        'last-binary': new Date(lastUpdated).toLocaleString(),
         'ping': 'up',
         'total-binary': 1234
       }

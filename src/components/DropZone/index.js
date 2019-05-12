@@ -43,6 +43,7 @@ const DropZone = props => {
    * @param  {Red} inputRef
    */
   useEffect(() => {
+    /* istanbul ignore next */
     if (isElectron()) {
       desktop.watch(inputRef.current);
     }

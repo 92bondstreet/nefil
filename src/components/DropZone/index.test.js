@@ -52,10 +52,12 @@ const dispatchEvt = (node, type, data) => {
 
 // More https://github.com/react-dropzone/react-dropzone/blob/master/src/index.spec.js
 describe('<DropZone />', () => {
-  let files;
+  let files, largeFiles, rejectedFiles;
 
   beforeEach(() => {
     files = [createFile('file1.pdf', 1111, 'application/pdf')];
+    rejectedFiles = [createFile('file1.png', 1111, 'image/png')];
+    largeFiles = [createFile('file1.pdf', 3000000, 'application/pdf')];
   });
 
   it('should render the DropZone section', () => {
@@ -74,5 +76,29 @@ describe('<DropZone />', () => {
     dispatchEvt(dropzone, 'drop', data);
     await flushPromises(ui, container);
     expect(onDrop).toHaveBeenCalled();
+  });
+
+  it('should drop only PDF files', async () => {
+    const data = mockData(rejectedFiles);
+    const onDrop = jest.fn(dropped => dropped);
+    const ui = <DropZone onDrop={onDrop}/>;
+    const {container, getByTestId} = render(ui);
+    const dropzone = getByTestId('dropzone-div');
+
+    dispatchEvt(dropzone, 'drop', data);
+    await flushPromises(ui, container);
+    expect(onDrop.mock.results[0].value.length).toBe(0);
+  });
+
+  it('should drop only PDF with size < 2 Mo', async () => {
+    const data = mockData(largeFiles);
+    const onDrop = jest.fn(dropped => dropped);
+    const ui = <DropZone onDrop={onDrop}/>;
+    const {container, getByTestId} = render(ui);
+    const dropzone = getByTestId('dropzone-div');
+
+    dispatchEvt(dropzone, 'drop', data);
+    await flushPromises(ui, container);
+    expect(onDrop.mock.results[0].value.length).toBe(0);
   });
 });

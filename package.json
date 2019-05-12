@@ -31,7 +31,9 @@
     "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
     "postinstall": "electron-builder install-app-deps",
     "preelectron-pack": "yarn build",
-    "electron-pack": "ELECTRON_PACK=true electron-builder"
+    "electron-pack": "ELECTRON_PACK=true electron-builder",
+    "coveralls": "yarn test --coverage --watchAll=false && cat ./coverage/lcov.info | coveralls",
+    "test-ci": "yarn test --coverage --watchAll=false"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -52,6 +54,7 @@
     "@rescripts/cli": "^0.0.10",
     "@rescripts/rescript-env": "^0.0.10",
     "concurrently": "^4.1.0",
+    "coveralls": "^3.0.3",
     "electron": "^5.0.1",
     "electron-builder": "^20.40.2",
     "fetch-mock": "^7.3.3",
@@ -66,7 +69,8 @@
       "src/**/*.js",
       "!src/@uik/**/*.js",
       "!src/index.js",
-      "!src/serviceWorker.js"
+      "!src/serviceWorker.js",
+      "!src/actions/desktop.js"
     ],
     "coverageThreshold": {
       "global": {

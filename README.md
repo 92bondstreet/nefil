@@ -1,5 +1,8 @@
 # NEFIL
 
+[![Build Status](https://travis-ci.org/92bondstreet/nefil.svg?branch=master)](https://travis-ci.org/92bondstreet/nefil)
+[![Coverage Status](https://coveralls.io/repos/github/92bondstreet/nefil/badge.svg?branch=master)](https://coveralls.io/github/92bondstreet/nefil?branch=master)
+
 > FHIR dashboard
 
 [![Nefil dashboard](./web.png)](https://nefil.now.sh/)
