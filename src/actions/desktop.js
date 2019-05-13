@@ -32,6 +32,9 @@ export async function watch (dropzone) {
     const mime = header.match(/:(.*?);/)[1];
     const blob = b64ToBlob(content, mime);
     const file = new File([blob], name);
+
+    file.source = 'desktop';
+
     const data = {
       'dataTransfer': {'files': [file], 'types': ['Files']},
       'preventDefault': function preventDefault () {}

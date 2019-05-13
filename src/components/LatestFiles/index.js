@@ -16,7 +16,9 @@ const getName = (file, index) => {
     return (
       <td key={`name-${index}`}>
         <Uikon>attachment</Uikon>{' '}
-        <a href={file.location} className={styles.attachment}>{file.name}</a>
+        <a href={file.location} className={styles.attachment}>
+          {file.name}
+        </a>
       </td>
     );
   }
@@ -24,6 +26,32 @@ const getName = (file, index) => {
   return <td key={`name-${index}`}>{file.name}</td>;
 };
 
+/**
+ * Get the source origin: desktop or drop zone
+ * @param  {Object} file
+ * @param  {Integer} index
+ * @return {HTMLElement}
+ */
+const getSource = (file, index) => {
+  if (file.source === 'desktop') {
+    return (
+      <td key={`source-${index}`} title="desktop watcher">
+        <Uikon>desktop</Uikon>{' '}From desktop
+      </td>
+    );
+  }
+
+  return (
+    <td key={`source-${index}`} title="drag'n'drop">
+      <Uikon>tap_click_force_touch</Uikon>{' '}From drop zone
+    </td>
+  );
+};
+
+/**
+ * Display table of latest uploaded files
+ * @param {Object} props
+ */
 const LatestFiles = props =>
   <UikWidget margin {...props} className={styles.container}>
     <UikWidgetHeader>
@@ -33,6 +61,7 @@ const LatestFiles = props =>
       <thead>
         <tr>
           <th>File Name</th>
+          <th>Source</th>
           <th>Date</th>
           <th className={styles.status}>Status</th>
         </tr>
@@ -41,7 +70,13 @@ const LatestFiles = props =>
         {props.files.map((file, index) =>
           <tr key={index}>
             {getName(file, index)}
-            <td key={`date-${index}`} title={file.date && file.date.toLocaleTimeString()}>{file.date ? file.date.toLocaleDateString() : '-'}</td>
+            {getSource(file, index)}
+            <td
+              key={`date-${index}`}
+              title={file.date && file.date.toLocaleTimeString()}
+            >
+              {file.date ? file.date.toLocaleDateString() : '-'}
+            </td>
             <td
               key={`status-${index}`}
               className={`${styles.value} ${styles[file.status]} ${
