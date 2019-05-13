@@ -25,9 +25,7 @@ const parseHistory = response => {
     analytics['total-binary'] = binary.total;
 
     if (latest && latest.resource) {
-      analytics['last-binary'] = new Date(
-        latest.resource.meta.lastUpdated
-      ).toLocaleString();
+      analytics['last-binary'] = new Date(latest.resource.meta.lastUpdated);
     }
   }
 
@@ -62,20 +60,28 @@ export default function DashboardReducer (state, action) {
         return file;
       })
     };
-  case types.CREATE_FILE_SUCCESS:
+  case types.CREATE_FILE_SUCCESS: {
+    const location = action.response.headers.get('location');
+
     return {
       ...state,
       'files': state.files.map(file => {
+        file.date = new Date();
+        file.location = location;
+
         if (file.uuid === action.uuid) {
           file.status = dashboard.STATUS_UPLOADED;
         }
         return file;
       })
     };
+  }
   case types.CREATE_FILE_FAILURE:
     return {
       ...state,
       'files': state.files.map(file => {
+        file.date = new Date();
+
         if (file.uuid === action.uuid) {
           file.status = dashboard.STATUS_FAILED;
         }

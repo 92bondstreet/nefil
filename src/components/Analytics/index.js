@@ -50,7 +50,7 @@ const Analytics = props => {
               <UikContentTitle>latest binary upload</UikContentTitle>
               <div className={styles.boxContent}>
                 <span className={styles.boxValue}>
-                  {props.analytics['last-binary']}
+                  {props.analytics['last-binary'].toLocaleString()}
                 </span>
               </div>
             </div>
