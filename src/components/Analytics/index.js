@@ -11,9 +11,10 @@ import {
 
 import styles from './analytics.module.scss';
 
+import {HISTORY_FHIR} from '../../constants/analytics';
 const STATUS = {
-  'up': <UikButton success>Up</UikButton>,
-  'down': <UikButton error>Down</UikButton>,
+  'up': <UikButton success Component="a" href={HISTORY_FHIR} target="_blank" rel="noopener noreferrer">Up</UikButton>,
+  'down': <UikButton error Component="a" href={HISTORY_FHIR} target="_blank" rel="noopener noreferrer">Down</UikButton>,
   'default': <UikButton primary isLoading />
 };
 
