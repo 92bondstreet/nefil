@@ -66,10 +66,9 @@ export default function DashboardReducer (state, action) {
     return {
       ...state,
       'files': state.files.map(file => {
-        file.date = new Date();
-        file.location = location;
-
         if (file.uuid === action.uuid) {
+          file.date = new Date();
+          file.location = location;
           file.status = dashboard.STATUS_UPLOADED;
         }
         return file;
@@ -80,9 +79,8 @@ export default function DashboardReducer (state, action) {
     return {
       ...state,
       'files': state.files.map(file => {
-        file.date = new Date();
-
         if (file.uuid === action.uuid) {
+          file.date = new Date();
           file.status = dashboard.STATUS_FAILED;
         }
         return file;

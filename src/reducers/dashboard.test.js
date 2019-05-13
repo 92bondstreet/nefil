@@ -16,7 +16,7 @@ const state = {
   ]
 };
 
-const lastUpdated = '2019-05-09';
+const lastUpdated = '2019-05-09T21:09:03.020+00:00';
 const responseBinary = {
   'resourceType': 'Bundle',
   'id': 'f3e09a0d-a765-4089-8de3-3020a9e5c36d',
@@ -44,8 +44,8 @@ const responseBinary = {
         'resourceType': 'Binary',
         'id': '1921753',
         'meta': {
-          'versionId': '1',
-          'lastUpdated': '2019-05-09'
+          lastUpdated,
+          'versionId': '1'
         },
         'contentType': 'application/pdf'
       },
@@ -84,8 +84,8 @@ const responseHistory = {
         'resourceType': 'Binary',
         'id': '1921753',
         'meta': {
-          'versionId': '1',
-          'lastUpdated': '2019-05-09'
+          lastUpdated,
+          'versionId': '1'
         },
         'contentType': 'application/pdf'
       },
@@ -96,6 +96,15 @@ const responseHistory = {
     }
   ]
 };
+
+const response = new Response(
+  {},
+  {
+    'headers': new Headers({
+      'location': 'http://hapi.fhir.org/baseDstu3/Binary/1921753/_history/1'
+    })
+  }
+);
 
 describe('dashboard reducer', () => {
   it('should return the current state if action is whatever', () => {
@@ -160,13 +169,15 @@ describe('dashboard reducer', () => {
   it('should set uploaded status if action is CREATE_FILE_SUCCESS', () => {
     expect(
       dashboard(state, {
+        response,
         'type': types.CREATE_FILE_SUCCESS,
         'uuid': '1db8a08e-64ac-45df-b6f8-21e144c29aa6'
       })
-    ).toEqual({
+    ).toMatchObject({
       'files': [
         {
           'name': 'file-1.png',
+          'location': 'http://hapi.fhir.org/baseDstu3/Binary/1921753/_history/1',
           'status': 'uploaded',
           'uuid': '1db8a08e-64ac-45df-b6f8-21e144c29aa6'
         },
@@ -185,7 +196,7 @@ describe('dashboard reducer', () => {
         'type': types.CREATE_FILE_FAILURE,
         'uuid': '1db8a08e-64ac-45df-b6f8-21e144c29aa6'
       })
-    ).toEqual({
+    ).toMatchObject({
       'files': [
         {
           'name': 'file-1.png',
@@ -212,7 +223,7 @@ describe('dashboard reducer', () => {
       )
     ).toEqual({
       'analytics': {
-        'last-binary': new Date(lastUpdated).toLocaleString(),
+        'last-binary': new Date(lastUpdated),
         'ping': 'up',
         'total-all': 56789,
         'total-binary': 1234
@@ -231,7 +242,7 @@ describe('dashboard reducer', () => {
       )
     ).toEqual({
       'analytics': {
-        'last-binary': new Date(lastUpdated).toLocaleString(),
+        'last-binary': new Date(lastUpdated),
         'ping': 'up',
         'total-binary': 1234
       }

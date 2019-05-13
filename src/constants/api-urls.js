@@ -1,1 +1,1 @@
-export const API_FHIR = 'https://hapi.fhir.org//baseDstu3';
+export const API_FHIR = 'https://hapi.fhir.org/baseDstu3';

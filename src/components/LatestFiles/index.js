@@ -41,7 +41,7 @@ const LatestFiles = props =>
         {props.files.map((file, index) =>
           <tr key={index}>
             {getName(file, index)}
-            <td key={`date-${index}`} title={file.date && file.date.toLocaleTimeString()}>{file.date && file.date.toLocaleDateString() || '-'}</td>
+            <td key={`date-${index}`} title={file.date && file.date.toLocaleTimeString()}>{file.date ? file.date.toLocaleDateString() : '-'}</td>
             <td
               key={`status-${index}`}
               className={`${styles.value} ${styles[file.status]} ${
