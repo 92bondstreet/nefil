@@ -33,6 +33,7 @@ const getName = (file, index) => {
  * @return {HTMLElement}
  */
 const getSource = (file, index) => {
+  /* istanbul ignore next */
   if (file.source === 'desktop') {
     return (
       <td key={`source-${index}`} title="desktop watcher">

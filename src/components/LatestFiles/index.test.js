@@ -62,4 +62,10 @@ describe('<LatestFiles />', () => {
 
     expect(getByText(new RegExp(date.toLocaleDateString()))).toBeInTheDocument();
   });
+
+  it('should render the source for uploaded file', () => {
+    const {getAllByText} = render(<LatestFiles files={MOCK_FILES} />);
+
+    expect(getAllByText(/tap_click_force_touch/).length).toBe(3);
+  });
 });
