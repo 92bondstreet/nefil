@@ -13,7 +13,7 @@ deploy: ## deploy with zeit
 	now --target production
 
 install: ## install what we need
-	mkidr -p ~/FHIR
+	mkdir -p ~/FHIR
 	yarn
 
 sandbox: ## sandbox for client-side application dev purpose
