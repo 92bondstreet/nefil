@@ -11,7 +11,7 @@ import styles from './latestfiles.module.scss';
  * @param  {Integer} index
  * @return {HTMLElement}
  */
-const getName = (file, index) => {
+const renderName = (file, index) => {
   if (file.location) {
     return (
       <td key={`name-${index}`}>
@@ -32,7 +32,7 @@ const getName = (file, index) => {
  * @param  {Integer} index
  * @return {HTMLElement}
  */
-const getSource = (file, index) => {
+const renderSource = (file, index) => {
   /* istanbul ignore next */
   if (file.source === 'desktop') {
     return (
@@ -70,8 +70,8 @@ const LatestFiles = props =>
       <tbody data-testid="latest-files-tbody">
         {props.files.map((file, index) =>
           <tr key={index}>
-            {getName(file, index)}
-            {getSource(file, index)}
+            {renderName(file, index)}
+            {renderSource(file, index)}
             <td
               key={`date-${index}`}
               title={file.date && file.date.toLocaleTimeString()}

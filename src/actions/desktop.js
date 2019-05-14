@@ -1,4 +1,5 @@
 import b64ToBlob from 'b64-to-blob';
+
 const {ipcRenderer}
   = (window.require && window.require('electron'))
   || function electron () {

@@ -4,15 +4,39 @@ import * as desktop from '../../actions/desktop';
 import Emoji from 'a11y-react-emoji';
 import isElectron from 'is-electron';
 import PropTypes from 'prop-types';
-import {UikButton, UikWidget, UikWidgetHeader, UikWidgetContent} from '@uik';
+import {
+  UikButton,
+  UikTag,
+  UikWidget,
+  UikWidgetHeader,
+  UikWidgetContent
+} from '@uik';
 import {useDropzone} from 'react-dropzone';
-import {DROP_ACCEPT_MIME_TYPES, DROP_MAX_SIZE_BYTES} from '../../constants/dropzone';
+import {
+  DROP_ACCEPT_MIME_TYPES,
+  DROP_MAX_SIZE_BYTES
+} from '../../constants/dropzone';
 
 import styles from './dropzone.module.scss';
 
 // Alternate bind version (for css-modules)
 // https://github.com/JedWatson/classnames#alternate-bind-version-for-css-modules
 const cx = classNames.bind(styles);
+
+/**
+ * Render drop status
+ * @param  {Array} rejectedFiles
+ * @return {HTMLElement}
+ */
+const renderStatus = rejectedFiles => {
+  const files = rejectedFiles.length;
+
+  if (files) {
+    return <UikTag color="red">+{files} rejected files</UikTag>;
+  }
+
+  return null;
+};
 
 const DropZone = props => {
   const {onDrop} = props;
@@ -22,7 +46,8 @@ const DropZone = props => {
     inputRef,
     isDragActive,
     isDragReject,
-    open
+    open,
+    rejectedFiles
   } = useDropzone({
     onDrop,
     'accept': DROP_ACCEPT_MIME_TYPES,
@@ -42,16 +67,19 @@ const DropZone = props => {
    * only for the desktop
    * @param  {Red} inputRef
    */
-  useEffect(() => {
-    /* istanbul ignore next */
-    if (isElectron()) {
-      desktop.watch(inputRef.current);
-    }
-  }, [inputRef]);
+  useEffect(
+    () => {
+      /* istanbul ignore next */
+      if (isElectron()) {
+        desktop.watch(inputRef.current);
+      }
+    },
+    [inputRef]
+  );
 
   return (
     <UikWidget margin>
-      <UikWidgetHeader>
+      <UikWidgetHeader rightEl={renderStatus(rejectedFiles)}>
         <Emoji symbol="🎯 " label="Drop" /> Drop Zone for Your Files
       </UikWidgetHeader>
       <UikWidgetContent>
