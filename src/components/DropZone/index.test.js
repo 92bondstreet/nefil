@@ -101,4 +101,17 @@ describe('<DropZone />', () => {
     await flushPromises(ui, container);
     expect(onDrop.mock.results[0].value.length).toBe(0);
   });
+
+  it('should render the number of rejected files', async () => {
+    const data = mockData(largeFiles);
+    const onDrop = jest.fn(dropped => dropped);
+    const ui = <DropZone onDrop={onDrop}/>;
+    const {container, getByText, getByTestId} = render(ui);
+    const dropzone = getByTestId('dropzone-div');
+
+    dispatchEvt(dropzone, 'drop', data);
+    await flushPromises(ui, container);
+
+    expect(getByText(/rejected files/)).toBeInTheDocument();
+  });
 });
